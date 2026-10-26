@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FalaCasimiro - CEM Professora Maria Casimiro Soares</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#FFFBF2;color:#11111A;font-family:'DM Sans',sans-serif}
+.mono{font-family:'Space Mono',monospace}
+.display{font-family:'Outfit',sans-serif;font-weight:800}
+.brutal{border:2.5px solid #11111A;box-shadow:6px 6px 0 #11111A;border-radius:20px}
+.btn{border:2.5px solid #11111A;box-shadow:4px 4px 0 #11111A;font-family:'Outfit';font-weight:800;text-transform:uppercase;cursor:pointer}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 #11111A}
+.pill{border:2px solid #11111A;padding:8px 14px;border-radius:999px;font-family:'Outfit';font-weight:800;font-size:12px;cursor:pointer;background:white;text-transform:uppercase}
+.pill.active{background:#1A237E;color:white;border-color:#1A237E}
+.hidden{display:none !important}
+.eye{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:18px}
+.wrap{position:relative}
+</style>
+</head>
+<body>
+<header style="border-bottom:2.5px solid #111;background:white;position:sticky;top:0;z-index:20">
+<div style="max-width:1220px;margin:auto;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+<div style="display:flex;align-items:center;gap:12px">
+<div style="width:48px;height:48px;border-radius:50%;background:#1A237E;border:2.5px solid #111;display:grid;place-items:center;color:white;font-weight:900">MC</div>
+<div>
+<h1 class="display" style="font-size:28px;line-height:.9">FALA<br>CASIMIRO</h1>
+<p class="mono" style="font-size:9px;font-weight:700;opacity:.7">CENTRO EDUCA MAIS • PROFESSORA MARIA CASIMIRO SOARES • BACABAL MA</p>
+</div>
+</div>
+<span id="badge" class="mono" style="font-size:10px;border:2px solid black;border-radius:999px;padding:4px 10px;background:white">CARREGANDO...</span>
+</div>
+</header>
+
+<div style="max-width:1220px;margin:auto;padding:12px 16px;display:flex;gap:8px">
+<button id="btnR" class="btn" style="background:#1A237E;color:white;border-radius:999px;padding:10px 18px;font-size:12px">✦ REGISTRAR</button>
+<button id="btnP" class="btn" style="background:white;border-radius:999px;padding:10px 18px;font-size:12px">MEU PROTOCOLO</button>
+<button id="btnD" class="btn" style="background:white;border-radius:999px;padding:10px 18px;font-size:12px">DIREÇÃO 🔒</button>
+</div>
+
+<main style="max-width:1220px;margin:auto;padding:0 16px 40px">
+<section id="tabR">
+<div style="display:grid;grid-template-columns:1.1fr .9fr;gap:16px" class="gr">
+<div>
+<h2 class="display" style="font-size:clamp(36px,6vw,56px);line-height:.9">SUA VOZ<br><span style="background:#FFC93C;padding:0 8px;border:2.5px solid black;display:inline-block;transform:rotate(-1deg)">IMPORTA.</span><br>FALA QUE A<br>GENTE ESCUTA.</h2>
+<div style="margin-top:16px;border:2.5px dashed black;border-radius:16px;padding:12px;background:white">
+<p class="mono" style="font-size:11px"><b>CEM Professora Maria Casimiro Soares:</b> Escolha a categoria, descreva, receba protocolo. A direção responde pelo app.</p>
+</div>
+</div>
+<div class="brutal" style="background:white;padding:18px">
+<h3 class="display" style="font-size:20px">NOVA OCORRÊNCIA ✦</h3>
+<label class="mono" style="font-size:11px;font-weight:700;margin-top:12px;display:block">CATEGORIA *</label>
+<div id="cats" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">
+<button class="pill" data-c="Infraestrutura">Infra</button>
+<button class="pill" data-c="Bullying">Bullying</button>
+<button class="pill" data-c="Professor / Aula">Professor</button>
+<button class="pill" data-c="Merenda">Merenda</button>
+<button class="pill" data-c="Limpeza / Banheiro">Banheiro</button>
+<button class="pill" data-c="Segurança">Segurança</button>
+<button class="pill" data-c="Transporte">Transporte</button>
+<button class="pill" data-c="Outro">Outro</button>
+</div>
+<label class="mono" style="font-size:11px;font-weight:700;margin-top:12px;display:block">LOCAL</label>
+<input id="inpLocal" style="width:100%;margin-top:6px;padding:12px;border:2.5px solid black;border-radius:12px" placeholder="Ex: Sala 7, Pátio...">
+<label class="mono" style="font-size:11px;font-weight:700;margin-top:12px;display:block">URGÊNCIA</label>
+<div id="urgs" style="display:flex;gap:6px;margin-top:6px">
+<button class="pill urg active" data-u="Baixa">de boa</button>
+<button class="pill urg" data-u="Média">média</button>
+<button class="pill urg" data-u="Alta">alta</button>
+<button class="pill urg" data-u="Urgente">URGENTE</button>
+</div>
+<label class="mono" style="font-size:11px;font-weight:700;margin-top:12px;display:block">DESCREVA *</label>
+<textarea id="inpDesc" rows="5" style="width:100%;margin-top:6px;padding:12px;border:2.5px solid black;border-radius:12px" placeholder="Fala com a gente, sem medo..."></textarea>
+<label class="mono" style="font-size:11px;font-weight:700;margin-top:12px;display:block">SEU NOME (OPCIONAL)</label>
+<input id="inpNome" style="width:100%;margin-top:6px;padding:12px;border:2.5px solid black;border-radius:12px" placeholder="Pode ficar anônimo">
+<button id="btnEnviar" class="btn" style="width:100%;margin-top:14px;background:#FFC93C;padding:14px;border-radius:14px;font-size:16px">ENVIAR →</button>
+<p id="msgEnv" class="mono" style="font-size:12px;font-weight:700;margin-top:8px;text-align:center"></p>
+</div>
+</div>
+</section>
+
+<section id="tabP" class="hidden">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" class="gr">
+<div class="brutal" style="background:white;padding:18px">
+<h3 class="display">BUSCAR PROTOCOLO</h3>
+<div style="display:flex;gap:8px;margin-top:10px">
+<input id="inpBusca" placeholder="CEM-XXXXXX" style="flex:1;padding:12px;border:2.5px solid black;border-radius:12px;font-family:Space Mono;font-weight:700">
+<button id="btnBuscar" class="btn" style="background:#1A237E;color:white;border-radius:12px;padding:12px 16px">BUSCAR</button>
+</div>
+<div id="resBusca" style="margin-top:12px"></div>
+</div>
+<div class="brutal" style="background:#FFC93C;padding:18px;transform:rotate(.5deg)">
+<h4 class="display">ACOMPANHE</h4>
+<p class="mono" style="font-size:11px;margin-top:6px">Guarde seu protocolo e use a busca para ver a resposta.</p>
+</div>
+</div>
+<div id="listaMinhas" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:16px"></div>
+</section>
+
+<section id="tabD" class="hidden">
+<div id="loginBox" style="max-width:420px;margin:20px auto">
+<div class="brutal" style="background:white;padding:24px;border-radius:24px">
+<div class="mono" style="display:inline-block;background:#111;color:white;border-radius:999px;padding:4px 12px;font-size:10px">ÁREA RESTRITA • DIREÇÃO</div>
+<h2 class="display" style="font-size:38px;margin-top:14px;line-height:.9">ACESSO<br>DIREÇÃO 🔒</h2>
+<label class="mono" style="font-size:11px;font-weight:700;margin-top:18px;display:block">SENHA</label>
+<div class="wrap" style="margin-top:8px">
+<input id="inpSenha" type="password" placeholder="digite a senha" style="width:100%;padding:14px 40px 14px 14px;border:2.5px solid black;border-radius:14px">
+<button class="eye" data-eye="inpSenha">👁️</button>
+</div>
+<button id="btnEntrar" class="btn" style="width:100%;margin-top:12px;background:#1A237E;color:white;padding:14px;border-radius:14px;font-size:16px">ENTRAR →</button>
+<p class="mono" style="font-size:10px;margin-top:12px;text-align:center;opacity:.6">Acesso restrito à direção • CEM Professora Maria Casimiro Soares</p>
+</div>
+</div>
+<div id="dirBox" class="hidden">
+<div id="kpis" style="display:flex;gap:10px;overflow:auto;margin-top:8px"></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+<select id="selCat" style="padding:10px;border:2.5px solid black;border-radius:999px;font-weight:700"><option value="">Todas categorias</option><option>Infraestrutura</option><option>Bullying</option><option>Professor / Aula</option><option>Merenda</option><option>Limpeza / Banheiro</option><option>Segurança</option><option>Transporte</option><option>Outro</option></select>
+<select id="selStat" style="padding:10px;border:2.5px solid black;border-radius:999px;font-weight:700"><option value="">Todos status</option><option>Recebida</option><option>Em Análise</option><option>Resolvida</option><option>Arquivada</option></select>
+<button id="btnExport" class="btn" style="background:white;border-radius:999px;padding:10px 16px">EXPORTAR CSV</button>
+<button id="btnSair" class="btn" style="background:white;border-radius:999px;padding:10px 16px">SAIR</button>
+<button id="btnAtualizar" class="btn" style="background:#FFC93C;border-radius:999px;padding:10px 16px">ATUALIZAR</button>
+</div>
+<div id="listaDir" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px;margin-top:12px"></div>
+<div class="brutal" style="background:white;padding:18px;margin-top:16px">
+<h4 class="display">CONFIGURAÇÕES</h4>
+<label class="mono" style="font-size:11px;font-weight:700;margin-top:12px;display:block">NOVA SENHA DA DIREÇÃO</label>
+<div style="display:flex;gap:8px;margin-top:8px">
+<div class="wrap" style="flex:1">
+<input id="inpNewPass" type="password" placeholder="nova senha (mín 4)" style="width:100%;padding:12px 40px 12px 12px;border:2.5px solid black;border-radius:12px">
+<button class="eye" data-eye="inpNewPass">👁️</button>
+</div>
+<button id="btnNovaSenha" class="btn" style="background:#FFC93C;border-radius:12px;padding:12px 16px">SALVAR</button>
+</div>
+<p id="msgPass" class="mono" style="font-size:11px;font-weight:700;margin-top:8px"></p>
+</div>
+</div>
+</section>
+</main>
+
+<footer style="border-top:2.5px solid #111;background:white;padding:16px;margin-top:20px">
+<div style="max-width:1220px;margin:auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<p class="mono" style="font-size:11px;font-weight:700">feito por alunos, para alunos ✦ CEM Professora Maria Casimiro Soares</p>
+<p class="mono" style="font-size:10px"><span style="border:2px solid black;border-radius:999px;padding:2px 8px">BACABAL • MA</span> <span style="background:#111;color:white;border-radius:999px;padding:2px 8px">2026 • FALACASIMIRO</span></p>
+</div>
+</footer>
+
+<div id="toast" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#111;color:white;padding:12px 18px;border-radius:999px;border:2.5px solid black;box-shadow:6px 6px 0 #111;font-family:Space Mono;font-weight:700;font-size:12px;z-index:99;display:none"></div>
+
+<script>
+// CONFIG JSONBIN - SEU BIN JA CONFIGURADO
+const CFG = {
+  binId: "6adf8185ffd5d160538d6bdb",
+  key: "$2a$10$T8PbWHLkxMbjyXDEAo75Wug8sWlOdJ9aOKJsH03aO5A1RG0RAgW5S"
+};
+let USE_CLOUD = CFG.binId !== "SEU_BIN_ID_AQUI";
+let dataStore = JSON.parse(localStorage.getItem('fc_v1') || '{"ocorrencias":[],"senha":"falacasimiro2026"}');
+let cat='', urg='Baixa', logado=false;
+
+function toast(t){let e=document.getElementById('toast');e.textContent=t;e.style.display='block';setTimeout(()=>e.style.display='none',3000)}
+function saveLocal(){localStorage.setItem('fc_v1', JSON.stringify(dataStore));}
+function badge(){let b=document.getElementById('badge');b.textContent = (dataStore.ocorrencias.length||0)+' REGISTROS • '+(USE_CLOUD?'ONLINE':'OFFLINE');}
+
+async function cloudLoad(){
+ if(!USE_CLOUD) return dataStore;
+ try{
+  let r = await fetch('https://api.jsonbin.io/v3/b/'+CFG.binId+'/latest', {headers:{'X-Master-Key':CFG.key}});
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  let j = await r.json();
+  let rec = j.record || j;
+  if(!rec.ocorrencias) rec.ocorrencias=[];
+  if(!rec.senha) rec.senha='falacasimiro2026';
+  dataStore = rec;
+  saveLocal();
+  badge();
+  return rec;
+ }catch(e){
+  console.log('cloud load fail', e);
+  toast('Usando offline: '+e.message);
+  return dataStore;
+ }
+}
+async function cloudSave(obj){
+ if(!USE_CLOUD){ dataStore=obj; saveLocal(); badge(); return; }
+ try{
+  let r = await fetch('https://api.jsonbin.io/v3/b/'+CFG.binId, {method:'PUT', headers:{'Content-Type':'application/json','X-Master-Key':CFG.key}, body:JSON.stringify(obj)});
+  if(!r.ok){ let t=await r.text(); throw new Error('HTTP '+r.status+' '+t.slice(0,100)); }
+  dataStore=obj; saveLocal(); badge();
+ }catch(e){ console.log('cloud save fail', e); throw e; }
+}
+
+function card(o, isDir){
+ let id=o.id;
+ return `<div class="brutal" style="background:white;padding:14px;border-left:6px solid ${o.status==='Resolvida'?'#16a34a':o.status==='Em Análise'?'#2563eb':'#111'}">
+ <div style="display:flex;justify-content:space-between"><span style="background:#1A237E;color:white;border:2px solid black;border-radius:999px;padding:2px 8px;font-size:10px;font-weight:800;font-family:Outfit">${o.categoria}</span><span style="border:2px solid black;border-radius:999px;padding:2px 8px;font-size:10px;font-weight:800">${o.status}</span></div>
+ <div class="mono" style="font-size:11px;margin-top:8px"><b>${o.protocolo}</b> • ${o.data}</div>
+ <div class="mono" style="font-size:10px"><b>${o.local||'-'}</b> • ${o.urgencia} • ${o.nome}</div>
+ <p style="margin-top:8px;font-size:13px;white-space:pre-wrap">${o.descricao}</p>
+ ${o.resposta?`<div style="margin-top:8px;background:#f0fdf4;border:2px solid #16a34a;border-radius:10px;padding:8px"><b style="font-size:11px">Resposta:</b><br><span style="font-size:13px">${o.resposta}</span></div>`:''}
+ ${isDir?`<div style="margin-top:10px;border-top:2px solid black;padding-top:8px">
+ <select data-st="${id}" style="width:100%;padding:8px;border:2px solid black;border-radius:10px;font-weight:700"><option ${o.status=='Recebida'?'selected':''}>Recebida</option><option ${o.status=='Em Análise'?'selected':''}>Em Análise</option><option ${o.status=='Resolvida'?'selected':''}>Resolvida</option><option ${o.status=='Arquivada'?'selected':''}>Arquivada</option></select>
+ <textarea id="resp-${id}" style="width:100%;margin-top:8px;padding:8px;border:2px solid black;border-radius:10px">${o.resposta||''}</textarea>
+ <div style="display:flex;gap:6px;margin-top:6px"><button data-save="${id}" class="btn" style="background:#FFC93C;border-radius:10px;padding:8px 12px;font-size:11px;flex:1">SALVAR</button><button data-del="${id}" class="btn" style="background:white;border-radius:10px;padding:8px 12px;font-size:11px">APAGAR</button></div>
+ </div>`:''}
+ </div>`;
+}
+
+function renderMinhas(){
+ let all=dataStore.ocorrencias||[];
+ document.getElementById('listaMinhas').innerHTML = all.slice(0,50).map(o=>card(o,false)).join('') || '<div class="brutal" style="background:white;padding:16px;text-align:center">Nenhuma ainda</div>';
+}
+function renderDir(){
+ let lista = (dataStore.ocorrencias||[]).slice();
+ let c=document.getElementById('selCat').value;
+ let s=document.getElementById('selStat').value;
+ if(c) lista=lista.filter(x=>x.categoria===c);
+ if(s) lista=lista.filter(x=>x.status===s);
+ document.getElementById('kpis').innerHTML = `<div class="brutal" style="background:white;padding:12px;min-width:110px"><b class="display" style="font-size:28px">${dataStore.ocorrencias.length}</b><br><span class="mono" style="font-size:10px">TOTAL</span></div><div class="brutal" style="background:white;padding:12px;min-width:110px"><b class="display" style="font-size:28px">${dataStore.ocorrencias.filter(x=>x.status=='Recebida').length}</b><br><span class="mono" style="font-size:10px">RECEBIDAS</span></div><div class="brutal" style="background:#FFC93C;padding:12px;min-width:110px"><b class="display" style="font-size:28px">${dataStore.ocorrencias.filter(x=>x.status=='Resolvida').length}</b><br><span class="mono" style="font-size:10px">RESOLVIDAS</span></div>`;
+ document.getElementById('listaDir').innerHTML = lista.map(o=>card(o,true)).join('') || '<div class="brutal" style="background:white;padding:16px">Vazio</div>';
+ // rebind dir actions
+ document.querySelectorAll('[data-st]').forEach(sel=>{ sel.onchange = async function(){ let id=parseInt(this.getAttribute('data-st')); let v=this.value; let idx=dataStore.ocorrencias.findIndex(x=>x.id===id); if(idx>-1){ dataStore.ocorrencias[idx].status=v; try{await cloudSave(dataStore); renderDir(); toast('Status atualizado');}catch(e){toast('Erro: '+e.message);} } } });
+ document.querySelectorAll('[data-save]').forEach(b=>{ b.onclick = async function(){ let id=parseInt(this.getAttribute('data-save')); let txt=document.getElementById('resp-'+id).value; let idx=dataStore.ocorrencias.findIndex(x=>x.id===id); if(idx>-1){ dataStore.ocorrencias[idx].resposta=txt; try{await cloudSave(dataStore); toast('Resposta salva'); renderMinhas();}catch(e){toast('Erro: '+e.message);} } } });
+ document.querySelectorAll('[data-del]').forEach(b=>{ b.onclick = async function(){ let id=parseInt(this.getAttribute('data-del')); if(!confirm('Apagar?')) return; dataStore.ocorrencias=dataStore.ocorrencias.filter(x=>x.id!==id); try{await cloudSave(dataStore); renderMinhas(); renderDir(); toast('Apagado');}catch(e){toast('Erro: '+e.message);} } });
+}
+
+// tabs - sempre funcionam, sem depender da nuvem
+function showTab(name){
+ document.getElementById('tabR').classList.add('hidden');
+ document.getElementById('tabP').classList.add('hidden');
+ document.getElementById('tabD').classList.add('hidden');
+ document.getElementById('tab'+name).classList.remove('hidden');
+ document.getElementById('btnR').style.background='white'; document.getElementById('btnR').style.color='black';
+ document.getElementById('btnP').style.background='white'; document.getElementById('btnP').style.color='black';
+ document.getElementById('btnD').style.background='white'; document.getElementById('btnD').style.color='black';
+ document.getElementById('btn'+name).style.background='#1A237E'; document.getElementById('btn'+name).style.color='white';
+ if(name==='P') renderMinhas();
+}
+document.getElementById('btnR').onclick=()=>showTab('R');
+document.getElementById('btnP').onclick=()=>showTab('P');
+document.getElementById('btnD').onclick=()=>showTab('D');
+
+// pills
+document.querySelectorAll('[data-c]').forEach(b=>{ b.onclick=function(){ document.querySelectorAll('[data-c]').forEach(x=>x.classList.remove('active')); this.classList.add('active'); cat=this.getAttribute('data-c'); }});
+document.querySelectorAll('[data-u]').forEach(b=>{ b.onclick=function(){ document.querySelectorAll('[data-u]').forEach(x=>x.classList.remove('active')); this.classList.add('active'); urg=this.getAttribute('data-u'); }});
+
+// eye
+document.querySelectorAll('.eye').forEach(btn=>{
+ btn.onclick=function(){
+  let input=document.getElementById(this.getAttribute('data-eye'));
+  if(input.type==='password'){input.type='text'; this.textContent='🙈';}else{input.type='password'; this.textContent='👁️';}
+ }
+});
+
+// enviar
+document.getElementById('btnEnviar').onclick = async function(){
+ let desc=document.getElementById('inpDesc').value.trim();
+ let localV=document.getElementById('inpLocal').value.trim();
+ let nome=document.getElementById('inpNome').value.trim()||'Anônimo';
+ if(!cat){toast('Escolha categoria'); return;}
+ if(!desc){toast('Descreva o ocorrido'); return;}
+ let btn=this; let orig=btn.textContent; btn.disabled=true; btn.textContent='ENVIANDO...';
+ try{
+  await cloudLoad();
+  let proto='CEM-'+Date.now().toString().slice(-6)+'-'+Math.floor(Math.random()*90+10);
+  let item={id:Date.now(), protocolo:proto, categoria:cat, local:localV, urgencia:urg, descricao:desc, nome:nome, status:'Recebida', data:new Date().toLocaleString('pt-BR'), resposta:'', timestamp:Date.now()};
+  dataStore.ocorrencias.unshift(item);
+  await cloudSave(dataStore);
+  document.getElementById('msgEnv').textContent='✅ '+proto+' enviado!';
+  document.getElementById('inpDesc').value=''; document.getElementById('inpLocal').value=''; document.getElementById('inpNome').value='';
+  document.querySelectorAll('[data-c]').forEach(x=>x.classList.remove('active')); cat='';
+  toast('✦ PROTOCOLO '+proto+' CRIADO!');
+  renderMinhas();
+ }catch(e){
+  console.error(e);
+  document.getElementById('msgEnv').textContent='❌ Erro: '+e.message;
+  toast('Erro: '+e.message);
+ }finally{
+  btn.disabled=false; btn.textContent=orig;
+ }
+};
+
+document.getElementById('btnBuscar').onclick=function(){
+ let p=document.getElementById('inpBusca').value.trim().toUpperCase();
+ let ach=(dataStore.ocorrencias||[]).find(x=>x.protocolo.toUpperCase()===p);
+ document.getElementById('resBusca').innerHTML = ach ? card(ach,false) : '<p class="mono" style="font-size:11px">Não encontrado</p>';
+};
+document.getElementById('btnEntrar').onclick=async function(){
+ await cloudLoad();
+ let s=document.getElementById('inpSenha').value;
+ if(s===dataStore.senha){ logado=true; document.getElementById('loginBox').classList.add('hidden'); document.getElementById('dirBox').classList.remove('hidden'); renderDir(); toast('Acesso liberado'); }else{ toast('Senha incorreta'); }
+};
+document.getElementById('btnSair').onclick=function(){ logado=false; document.getElementById('loginBox').classList.remove('hidden'); document.getElementById('dirBox').classList.add('hidden'); };
+document.getElementById('btnAtualizar').onclick=async function(){ await cloudLoad(); renderMinhas(); if(logado) renderDir(); toast('Atualizado!'); };
+document.getElementById('selCat').onchange=renderDir;
+document.getElementById('selStat').onchange=renderDir;
+document.getElementById('btnExport').onclick=function(){
+ let csv='protocolo;data;categoria;local;urgencia;nome;status;descricao;resposta\n';
+ (dataStore.ocorrencias||[]).forEach(r=>{csv+=`${r.protocolo};${r.data};${r.categoria};${r.local};${r.urgencia};${r.nome};${r.status};${r.descricao.replace(/;/g,',').replace(/\n/g,' ')};${(r.resposta||'').replace(/;/g,',')}\n`;});
+ let b=new Blob([csv],{type:'text/csv'}); let u=URL.createObjectURL(b); let a=document.createElement('a'); a.href=u; a.download='falacasimiro.csv'; a.click();
+};
+document.getElementById('btnNovaSenha').onclick=async function(){
+ let np=document.getElementById('inpNewPass').value.trim();
+ if(np.length<4){toast('Mínimo 4'); return;}
+ dataStore.senha=np;
+ try{ await cloudSave(dataStore); document.getElementById('msgPass').textContent='✅ Nova senha: '+np; document.getElementById('inpNewPass').value=''; toast('Senha alterada'); }catch(e){toast('Erro: '+e.message);}
+};
+
+// init
+(async function init(){
+ badge();
+ try{ await cloudLoad(); }catch(e){}
+ renderMinhas();
+ badge();
+})();
+</script>
+<style>@media(max-width:800px){.gr{grid-template-columns:1fr !important}}</style>
+</body>
+</html>
