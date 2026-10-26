@@ -3,7 +3,7 @@ Centro Educa Mais Prof. Maria Casimiro Soares - Bacabal / MA
 App 100% gratuito, sem Play Store, para alunos fazerem reclamações de formaanônima, rápida e segura.
 📱 Acesse o App
 Link oficial:
-https://91michellybraga-sys/FalaCasimiro
+(https://91michellybraga-sys.github.io/FalaCasimiro/)
 Escaneie o QR Code na porta da direção ou acesse o link acima.
 ✨ Funcionalidades
 Para Alunos:
